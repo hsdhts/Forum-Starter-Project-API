@@ -3,10 +3,12 @@ const pool = require('../src/Infrastructures/database/postgres/pool');
 
 const LikesTableTestHelper = {
   async insertLike({
-    id = 'like-123', owner_id = 'user-123', comment_id = 'comment-123',
+    id = 'like-123',
+    owner_id = 'user-123',
+    comment_id = 'comment-123',
   }) {
     const query = {
-      text: 'INSERT INTO likes VALUES($1, $2, $3)',
+      text: 'INSERT INTO likes (id, comment_id, owner_id) VALUES ($1, $2, $3)',
       values: [id, comment_id, owner_id],
     };
 
@@ -24,7 +26,7 @@ const LikesTableTestHelper = {
   },
 
   async cleanTable() {
-    await pool.query('DELETE FROM likes WHERE 1=1');
+    await pool.query('DELETE FROM likes');
   },
 };
 

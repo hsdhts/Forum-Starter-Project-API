@@ -10,10 +10,13 @@ class ThreadsHandler {
   }
 
   async postThreadHandler(request, h) {
-
     const { id: owner_id } = request.auth.credentials;
+    
     const addThreadUseCase = this._container.getInstance(AddThreadUseCase.name);
+    
+    // Menambahkan owner_id ke request.payload
     request.payload.owner_id = owner_id;
+    
     const addedThread = await addThreadUseCase.execute(request.payload);
 
     const response = h.response({
@@ -26,14 +29,12 @@ class ThreadsHandler {
         },
       },
     });
+    
     response.code(201);
     return response;
-  
   }
 
   async getThreadDetailHandler(request, h) {
-    
-    
     const { id } = request.params;
     const getThreadDetailUseCase = this._container.getInstance(GetThreadDetailUseCase.name);
     const useCasePayload = { id };
@@ -45,10 +46,9 @@ class ThreadsHandler {
         thread: threadDetail,
       },
     });
+    
     return response;
- 
   }
-
 }
 
 module.exports = ThreadsHandler;

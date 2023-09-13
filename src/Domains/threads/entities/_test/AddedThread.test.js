@@ -1,13 +1,13 @@
 const AddedThread = require('../AddedThread');
 
-describe('a AddedThread entities', () => {
+describe('AddedThread entities', () => {
   it('should throw error when payload did not contain needed property', () => {
     // Arrange
     const payload = {
       owner_id: 'user-123',
       title: 'title',
       body: 'body',
-      created_at: '2020-01-01T00:00:00.000Z',
+      created_at: '2023-09-09T00:00:00.000Z',
     };
 
     // Action and Assert
@@ -28,14 +28,14 @@ describe('a AddedThread entities', () => {
     expect(() => new AddedThread(payload)).toThrowError('ADDED_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
   });
 
-  it('should create addedThread object correctly', () => {
+  it('should create AddedThread object correctly', () => {
     // Arrange
     const payload = {
       id: 'thread-123',
-      owner_id: 'user-123',
+      owner_id: 'husada-123',
       title: 'title',
       body: 'body',
-      created_at: new Date('2020-01-01T00:00:00.000Z'),
+      created_at: new Date('2023-09-09T00:00:00.000Z'),
     };
 
     // Action

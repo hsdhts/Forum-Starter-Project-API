@@ -1,11 +1,11 @@
 const CommentDetail = require('../CommentDetail');
 
-describe('a CommentDetail entities', () => {
-  it('should throw error when payload did not contain needed property', () => {
+describe('CommentDetail entities', () => {
+  it('should throw an error when payload is missing needed properties', () => {
     // Arrange
     const payload = {
       id: 'comment-123',
-      created_at: '2020-01-01T00:00:00.000Z',
+      created_at: '2023-09-09T00:00:00.000Z',
       content: 'content',
     };
 
@@ -13,7 +13,7 @@ describe('a CommentDetail entities', () => {
     expect(() => new CommentDetail(payload)).toThrowError('COMMENT_DETAIL.NOT_CONTAIN_NEEDED_PROPERTY');
   });
 
-  it('should throw error when payload did not meet data type specification', () => {
+  it('should throw an error when payload does not meet data type specifications', () => {
     // Arrange
     const payload = {
       id: 123,
@@ -27,12 +27,12 @@ describe('a CommentDetail entities', () => {
     expect(() => new CommentDetail(payload)).toThrowError('COMMENT_DETAIL.NOT_MEET_DATA_TYPE_SPECIFICATION');
   });
 
-  it('should create commentDetail object correctly', () => {
+  it('should create a CommentDetail object correctly', () => {
     // Arrange
     const payload = {
       id: 'comment-123',
       username: 'username',
-      created_at: new Date('2020-01-01T00:00:00.000Z'),
+      created_at: new Date('2023-09-09T00:00:00.000Z'),
       content: 'content',
       like_count: 0,
     };
@@ -47,15 +47,15 @@ describe('a CommentDetail entities', () => {
     expect(commentDetail.content).toEqual(payload.content);
   });
 
-  it('should create commentDetail object correctly when deleted_at is not null', () => {
+  it('should create a CommentDetail object correctly when deleted_at is not null', () => {
     // Arrange
     const payload = {
       id: 'comment-123',
       username: 'username',
       content: 'content',
       like_count: 0,
-      created_at: new Date('2020-01-01T00:00:00.000Z'),
-      deleted_at: new Date('2020-01-01T00:00:00.000Z'),
+      created_at: new Date('2023-09-09T00:00:00.000Z'),
+      deleted_at: new Date('2023-09-09T00:00:00.000Z'),
     };
 
     // Action

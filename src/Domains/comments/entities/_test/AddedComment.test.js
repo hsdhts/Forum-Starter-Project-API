@@ -1,14 +1,14 @@
 const AddedComment = require('../AddedComment');
 
-describe('a AddedComment entities', () => {
+describe('AddedComment entities', () => {
   it('should throw error when payload did not contain needed property', () => {
     // Arrange
     const payload = {
-      owner_id: 'user-123',
+      owner_id: 'husada-123',
       thread_id: 'thread-123',
       content: 'content',
-      created_at: '2020-01-01T00:00:00.000Z',
-      deleted_at: '2020-01-01T00:00:00.000Z',
+      created_at: '2023-09-09T00:00:00.000Z',
+      deleted_at: '2023-09-09T00:00:00.000Z',
     };
 
     // Action and Assert
@@ -37,8 +37,8 @@ describe('a AddedComment entities', () => {
       owner_id: 'user-123',
       thread_id: 'thread-123',
       content: 'content',
-      created_at: new Date('2020-01-01T00:00:00.000Z'),
-      deleted_at: new Date('2020-01-01T00:00:00.000Z'),
+      created_at: new Date('2023-09-09T00:00:00.000Z'),
+      deleted_at: new Date('2023-09-09T00:00:00.000Z'),
     };
 
     // Action
@@ -47,8 +47,7 @@ describe('a AddedComment entities', () => {
     // Assert
     expect(addedComment.id).toEqual(payload.id);
     expect(addedComment.owner_id).toEqual(payload.owner_id);
-    expect(addedComment.title).toEqual(payload.title);
-    expect(addedComment.body).toEqual(payload.body);
+    expect(addedComment.content).toEqual(payload.content);
     expect(addedComment.created_at).toEqual(payload.created_at);
   });
 });

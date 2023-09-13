@@ -1,11 +1,11 @@
 const ReplyDetail = require('../ReplyDetail');
 
-describe('a ReplyDetail entities', () => {
+describe('ReplyDetail entities', () => {
   it('should throw error when payload did not contain needed property', () => {
     // Arrange
     const payload = {
       id: 'reply-123',
-      created_at: '2020-01-01T00:00:00.000Z',
+      created_at: '2023-09-09T00:00:00.000Z',
       content: 'content',
     };
 
@@ -26,12 +26,12 @@ describe('a ReplyDetail entities', () => {
     expect(() => new ReplyDetail(payload)).toThrowError('REPLY_DETAIL.NOT_MEET_DATA_TYPE_SPECIFICATION');
   });
 
-  it('should create replyDetail object correctly', () => {
+  it('should create ReplyDetail object correctly', () => {
     // Arrange
     const payload = {
       id: 'reply-123',
       username: 'username',
-      created_at: new Date('2020-01-01T00:00:00.000Z'),
+      created_at: new Date('2023-09-09T00:00:00.000Z'),
       content: 'content',
     };
 
@@ -45,14 +45,14 @@ describe('a ReplyDetail entities', () => {
     expect(replyDetail.content).toEqual(payload.content);
   });
 
-  it('should create replyDetail object correctly when deleted_at is not null', () => {
+  it('should create ReplyDetail object correctly when deleted_at is not null', () => {
     // Arrange
     const payload = {
       id: 'reply-123',
       username: 'username',
       content: 'content',
-      created_at: new Date('2020-01-01T00:00:00.000Z'),
-      deleted_at: new Date('2020-01-01T00:00:00.000Z'),
+      created_at: new Date('2023-09-09T00:00:00.000Z'),
+      deleted_at: new Date('2023-09-09T00:00:00.000Z'),
     };
 
     // Action

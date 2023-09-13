@@ -10,12 +10,15 @@ class CommentsHandler {
   }
 
   async postCommentHandler(request, h) {
-   
     const { id: owner_id } = request.auth.credentials;
     const { threadId: thread_id } = request.params;
+    
     const addCommentUseCase = this._container.getInstance(AddCommentUseCase.name);
+    
+    // Menambahkan owner_id dan thread_id ke request.payload
     request.payload.owner_id = owner_id;
     request.payload.thread_id = thread_id;
+    
     const addedComment = await addCommentUseCase.execute(request.payload);
 
     const response = h.response({
@@ -28,24 +31,24 @@ class CommentsHandler {
         },
       },
     });
+
     response.code(201);
     return response;
-
   }
 
   async deleteCommentHandler(request, h) {
-   
     const { threadId: thread_id, commentId: comment_id } = request.params;
     const { id: owner_id } = request.auth.credentials;
+    
     const deleteCommentUseCase = this._container.getInstance(DeleteCommentUseCase.name);
     await deleteCommentUseCase.execute({ thread_id, comment_id, owner_id });
 
     const response = h.response({
       status: 'success',
     });
+    
     response.code(200);
     return response;
- 
   }
 }
 

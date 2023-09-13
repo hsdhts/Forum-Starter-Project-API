@@ -26,18 +26,18 @@ describe('CommentRepositoryPostgres', () => {
       // Arrange
       await UsersTableTestHelper.addUser({
         id: 'user-123',
-        username: 'dicoding',
+        username: 'Testing',
         password: 'secret',
-        fullname: 'Dicoding Indonesia',
+        fullname: 'Submission Testing',
       });
       await ThreadsTableTestHelper.masukkanThread({
         id: 'thread-123',
-        title: 'Dicoding Indonesia',
-        body: 'All About Dicoding Indonesia here',
+        title: 'Testing Submission',
+        body: 'This is Forum API Submission',
         owner_id: 'user-123',
       });
       const addComment = new AddComment({
-        content: 'dicoding',
+        content: 'Testing',
         owner_id: 'user-123',
         thread_id: 'thread-123',
       });
@@ -56,18 +56,18 @@ describe('CommentRepositoryPostgres', () => {
       // Arrange
       await UsersTableTestHelper.addUser({
         id: 'user-123',
-        username: 'dicoding',
-        password: 'secret',
-        fullname: 'Dicoding Indonesia',
+        username: 'testing',
+        password: 'password',
+        fullname: 'Submission Testing',
       });
       await ThreadsTableTestHelper.masukkanThread({
         id: 'thread-123',
-        title: 'Dicoding Indonesia',
-        body: 'All About Dicoding Indonesia here',
+        title: 'Testing Submission',
+        body: 'This Forum API Submission',
         owner_id: 'user-123',
       });
       const addComment = new AddComment({
-        content: 'dicoding',
+        content: 'Testing',
         thread_id: 'thread-123',
         owner_id: 'user-123',
       });
@@ -80,7 +80,7 @@ describe('CommentRepositoryPostgres', () => {
       // Assert
       expect(addedComment).toStrictEqual(new AddedComment({
         id: 'comment-123',
-        content: 'dicoding',
+        content: 'Testing',
         thread_id: 'thread-123',
         owner_id: 'user-123',
         created_at: expect.any(Object),
@@ -95,21 +95,21 @@ describe('CommentRepositoryPostgres', () => {
       // Arrange
       await UsersTableTestHelper.addUser({
         id: 'user-123',
-        username: 'dicoding',
-        password: 'secret',
-        fullname: 'Dicoding Indonesia',
+        username: 'testing',
+        password: 'password',
+        fullname: 'Submission Testing',
       });
 
       await ThreadsTableTestHelper.masukkanThread({
         id: 'thread-123',
-        title: 'Dicoding Indonesia',
-        body: 'All About Dicoding Indonesia here',
+        title: 'Testing Submission',
+        body: 'This Forum API Submission',
         owner_id: 'user-123',
       });
 
       await CommentsTableTestHelper.insertComment({
         id: 'comment-123',
-        content: 'dicoding comment',
+        content: 'testing comment',
         thread_id: 'thread-123',
         owner_id: 'user-123',
       });
@@ -124,8 +124,8 @@ describe('CommentRepositoryPostgres', () => {
       expect(comment).toStrictEqual(new CommentDetail({
         id: 'comment-123',
         thread_id: 'thread-123',
-        username: 'dicoding',
-        content: 'dicoding comment',
+        username: 'testing',
+        content: 'testing comment',
         like_count: 0,
         created_at: expect.any(Object),
       }));
@@ -168,21 +168,21 @@ describe('CommentRepositoryPostgres', () => {
       // Arrange
       await UsersTableTestHelper.addUser({
         id: 'user-123',
-        username: 'dicoding',
-        password: 'secret',
-        fullname: 'Dicoding Indonesia',
+        username: 'testing',
+        password: 'password',
+        fullname: 'Submission Testing',
       });
 
       await ThreadsTableTestHelper.masukkanThread({
         id: 'thread-123',
-        title: 'Dicoding Indonesia',
-        body: 'All About Dicoding Indonesia here',
+        title: 'Testing Submission',
+        body: 'This Forum API Submission',
         owner_id: 'user-123',
       });
 
       await CommentsTableTestHelper.insertComment({
         id: 'comment-123',
-        content: 'dicoding',
+        content: 'testing',
         owner_id: 'user-123',
         thread_id: 'thread-123',
       });
@@ -229,21 +229,21 @@ describe('CommentRepositoryPostgres', () => {
       // Arrange
       await UsersTableTestHelper.addUser({
         id: 'user-123',
-        username: 'dicoding',
-        password: 'secret',
-        fullname: 'Dicoding Indonesia',
+        username: 'testing',
+        password: 'password',
+        fullname: 'Submission Testing',
       });
 
       await ThreadsTableTestHelper.masukkanThread({
         id: 'thread-123',
-        title: 'Dicoding Indonesia',
-        body: 'All About Dicoding Indonesia here',
+        title: 'Testing Submission',
+        body: 'This Forum API Submission',
         owner_id: 'user-123',
       });
 
       await CommentsTableTestHelper.insertComment({
         id: 'comment-123',
-        content: 'dicoding comment',
+        content: 'testing comment',
         owner_id: 'user-123',
         thread_id: 'thread-123',
       });
@@ -257,8 +257,8 @@ describe('CommentRepositoryPostgres', () => {
       // Assert
       expect(comments).toHaveLength(1);
       expect(comments[0].id).toBe('comment-123');
-      expect(comments[0].content).toBe('dicoding comment');
-      expect(comments[0].username).toBe('dicoding');
+      expect(comments[0].content).toBe('testing comment');
+      expect(comments[0].username).toBe('testing');
       expect(comments[0].date).toBeDefined();
     });
   });

@@ -1,10 +1,16 @@
 const AddReply = require('../AddReply');
 
-describe('a AddReply entities', () => {
+describe('AddReply entities', () => {
+  const validPayload = {
+    owner_id: 'husada-123',
+    comment_id: 'comment-123',
+    content: 'content',
+  };
+
   it('should throw error when payload did not contain needed property', () => {
     // Arrange
     const payload = {
-      owner_id: 'user-123',
+      owner_id: 'husada-123',
       content: 'content',
     };
 
@@ -25,19 +31,10 @@ describe('a AddReply entities', () => {
   });
 
   it('should create AddReply object correctly', () => {
-    // Arrange
-    const payload = {
-      owner_id: 'user-123',
-      comment_id: 'comment-123',
-      content: 'content',
-    };
-
     // Action
-    const { owner_id, comment_id, content } = new AddReply(payload);
+    const reply = new AddReply(validPayload);
 
     // Assert
-    expect(owner_id).toBe(payload.owner_id);
-    expect(comment_id).toBe(payload.comment_id);
-    expect(content).toBe(payload.content);
+    expect(reply).toEqual(validPayload);
   });
 });

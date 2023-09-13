@@ -11,11 +11,15 @@ class AddComment {
 
   _verifyPayload({ owner_id, thread_id, content }) {
     if (!owner_id || !thread_id || !content) {
-      throw new Error('ADD_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY');
+      throw new Error("ADD_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY");
     }
 
-    if (typeof owner_id !== 'string' || typeof thread_id !== 'string' || typeof content !== 'string') {
-      throw new Error('ADD_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION');
+    if (
+      typeof owner_id !== "string" ||
+      typeof thread_id !== "string" ||
+      typeof content !== "string"
+    ) {
+      throw new Error("ADD_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION");
     }
   }
 }

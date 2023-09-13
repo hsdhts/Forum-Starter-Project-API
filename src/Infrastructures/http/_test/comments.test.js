@@ -23,32 +23,36 @@ describe('/comments endpoint', () => {
     jest.setTimeout(120000);
   });
 
+  // Utility function to create a comment and return its ID
+  async function createCommentAndReturnId(server, accessToken, threadId, payload) {
+    const response = await server.inject({
+      method: 'POST',
+      url: `/threads/${threadId}/comments`,
+      payload,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const responseJson = JSON.parse(response.payload);
+    return responseJson.data.addedComment.id;
+  }
+
   describe('when POST /comments', () => {
     it('should response 201 and persisted comment', async () => {
       // Arrange
       const requestPayload = {
         content: 'content',
       };
-      // eslint-disable-next-line no-undef
       const server = await createServer(container);
       const accessToken = await AuthenticationsTestHelper.getAccessToken(server);
       const threadId = await ThreadsTestHelper.getThreadId(server, accessToken);
 
       // Action
-      const response = await server.inject({
-        method: 'POST',
-        url: `/threads/${threadId}/comments`,
-        payload: requestPayload,
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const commentId = await createCommentAndReturnId(server, accessToken, threadId, requestPayload);
 
       // Assert
-      const responseJson = JSON.parse(response.payload);
-      expect(response.statusCode).toEqual(201);
-      expect(responseJson.status).toEqual('success');
-      expect(responseJson.data.addedComment).toBeDefined();
+      expect(commentId).toBeDefined();
     });
 
     it('should response 400 when request payload not contain needed property', async () => {

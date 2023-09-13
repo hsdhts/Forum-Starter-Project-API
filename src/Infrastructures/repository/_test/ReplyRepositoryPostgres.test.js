@@ -28,14 +28,14 @@ describe('ReplyRepositoryPostgres', () => {
       // Arrange
       await UsersTableTestHelper.addUser({
         id: 'user-123',
-        username: 'dicoding',
-        password: 'secret',
+        username: 'testing',
+        password: 'password',
         fullname: 'Dicoding Indonesia',
       });
       await ThreadsTableTestHelper.masukkanThread({
         id: 'thread-123',
-        title: 'Dicoding Indonesia',
-        body: 'All About Dicoding Indonesia here',
+        title: 'Testing Submission',
+        body: 'This Forum API Submission',
         owner_id: 'user-123',
       });
       await CommentsTableTestHelper.insertComment({
@@ -63,23 +63,23 @@ describe('ReplyRepositoryPostgres', () => {
       // Arrange
       await UsersTableTestHelper.addUser({
         id: 'user-123',
-        username: 'dicoding',
-        password: 'secret',
+        username: 'testing',
+        password: 'password',
         fullname: 'Dicoding Indonesia',
       });
       await ThreadsTableTestHelper.masukkanThread({
         id: 'thread-123',
-        title: 'Dicoding Indonesia',
-        body: 'All About Dicoding Indonesia here',
+        title: 'Testing Submission',
+        body: 'This Forum API Submission',
         owner_id: 'user-123',
       });
       await CommentsTableTestHelper.insertComment({
         id: 'comment-123',
-        content: 'Hello World',
+        content: 'testing',
         owner_id: 'user-123',
       });
       const addReply = new AddReply({
-        content: 'dicoding',
+        content: 'testing reply',
         comment_id: 'comment-123',
         owner_id: 'user-123',
       });
@@ -92,7 +92,7 @@ describe('ReplyRepositoryPostgres', () => {
       // Assert
       expect(addedReply).toStrictEqual(new AddedReply({
         id: 'reply-123',
-        content: 'dicoding',
+        content: 'testing reply',
         comment_id: 'comment-123',
         owner_id: 'user-123',
         created_at: expect.any(Object),
@@ -105,28 +105,28 @@ describe('ReplyRepositoryPostgres', () => {
       // Arrange
       await UsersTableTestHelper.addUser({
         id: 'user-123',
-        username: 'dicoding',
-        password: 'secret',
-        fullname: 'Dicoding Indonesia',
+        username: 'testing',
+        password: 'password',
+        fullname: 'Submission Testing',
       });
 
       await ThreadsTableTestHelper.masukkanThread({
         id: 'thread-123',
-        title: 'Dicoding Indonesia',
-        body: 'All About Dicoding Indonesia here',
+        title: 'Testing Submission',
+        body: 'This Forum API Submission',
         owner_id: 'user-123',
       });
 
       await CommentsTableTestHelper.insertComment({
         id: 'comment-123',
-        content: 'dicoding comment',
+        content: 'testing',
         thread_id: 'thread-123',
         owner_id: 'user-123',
       });
 
       await RepliesTableTestHelper.insertReply({
         id: 'reply-123',
-        content: 'dicoding reply',
+        content: 'testing reply',
         comment_id: 'comment-123',
         owner_id: 'user-123',
       });
@@ -141,8 +141,8 @@ describe('ReplyRepositoryPostgres', () => {
       expect(reply).toStrictEqual(new ReplyDetail({
         id: 'reply-123',
         thread_id: 'thread-123',
-        username: 'dicoding',
-        content: 'dicoding reply',
+        username: 'testing',
+        content: 'testing reply',
         created_at: expect.any(Object),
       }));
     });
@@ -184,28 +184,28 @@ describe('ReplyRepositoryPostgres', () => {
       // Arrange
       await UsersTableTestHelper.addUser({
         id: 'user-123',
-        username: 'dicoding',
-        password: 'secret',
-        fullname: 'Dicoding Indonesia',
+        username: 'testing',
+        password: 'password',
+        fullname: 'Submission Testing',
       });
 
       await ThreadsTableTestHelper.masukkanThread({
         id: 'thread-123',
-        title: 'Dicoding Indonesia',
-        body: 'All About Dicoding Indonesia here',
+        title: 'Testing Submission',
+        body: 'This Forum API Submission',
         owner_id: 'user-123',
       });
 
       await CommentsTableTestHelper.insertComment({
         id: 'comment-123',
-        content: 'dicoding',
+        content: 'testing reply',
         owner_id: 'user-123',
         thread_id: 'thread-123',
       });
 
       await RepliesTableTestHelper.insertReply({
         id: 'reply-123',
-        content: 'dicoding',
+        content: 'testing reply',
         owner_id: 'user-123',
         comment_id: 'comment-123',
       });
@@ -252,28 +252,28 @@ describe('ReplyRepositoryPostgres', () => {
       // Arrange
       await UsersTableTestHelper.addUser({
         id: 'user-123',
-        username: 'dicoding',
-        password: 'secret',
-        fullname: 'Dicoding Indonesia',
+        username: 'testing',
+        password: 'password',
+        fullname: 'Submission Testing',
       });
 
       await ThreadsTableTestHelper.masukkanThread({
         id: 'thread-123',
-        title: 'Dicoding Indonesia',
-        body: 'All About Dicoding Indonesia here',
+        title: 'Testing Submission',
+        body: 'This Forum API Submission',
         owner_id: 'user-123',
       });
 
       await CommentsTableTestHelper.insertComment({
         id: 'comment-123',
-        content: 'dicoding comment',
+        content: 'testing reply',
         owner_id: 'user-123',
         thread_id: 'thread-123',
       });
 
       await RepliesTableTestHelper.insertReply({
         id: 'reply-123',
-        content: 'dicoding reply',
+        content: 'testing reply',
         owner_id: 'user-123',
         comment_id: 'comment-123',
       });
@@ -287,8 +287,8 @@ describe('ReplyRepositoryPostgres', () => {
       // Assert
       expect(replies).toHaveLength(1);
       expect(replies[0].id).toBe('reply-123');
-      expect(replies[0].content).toBe('dicoding reply');
-      expect(replies[0].username).toBe('dicoding');
+      expect(replies[0].content).toBe('testing reply');
+      expect(replies[0].username).toBe('testing');
       expect(replies[0].date).toBeDefined();
     });
   });

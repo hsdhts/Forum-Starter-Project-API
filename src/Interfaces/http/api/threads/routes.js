@@ -4,7 +4,7 @@ const routes = (handler) => ([
     path: '/threads',
     handler: handler.postThreadHandler,
     options: {
-      auth: 'forum_api_jwt',
+      auth: 'forum_sub_v1',
       tags: ['api', 'threads'],
       description: 'Membuat thread baru',
     },

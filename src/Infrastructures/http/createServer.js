@@ -9,13 +9,14 @@ const threads = require('../../Interfaces/http/api/threads');
 const comments = require('../../Interfaces/http/api/comments');
 const replies = require('../../Interfaces/http/api/replies');
 
-
+// Create and configure the Hapi.js server
 const createServer = async (container) => {
   const server = Hapi.server({
     host: process.env.HOST,
     port: process.env.PORT,
   });
 
+  // Register necessary plugins (Jwt and Inert)
   await server.register([
     {
       plugin: Jwt,
@@ -25,8 +26,8 @@ const createServer = async (container) => {
     },
   ]);
 
- 
-  server.auth.strategy('forum_api_jwt', 'jwt', {
+  // Configure JWT authentication strategy
+  server.auth.strategy('forum_sub_v1', 'jwt', {
     keys: process.env.ACCESS_TOKEN_KEY,
     verify: {
       aud: false,
@@ -42,6 +43,7 @@ const createServer = async (container) => {
     }),
   });
 
+  // Register API routes using plugins for users, authentications, threads, comments, and replies
   await server.register([
     {
       plugin: users,
@@ -62,18 +64,16 @@ const createServer = async (container) => {
     {
       plugin: replies,
       options: { container },
-    }
+    },
   ]);
 
+  // Handle errors and translate them to appropriate responses
   server.ext('onPreResponse', (request, h) => {
-
     const { response } = request;
 
     if (response instanceof Error) {
-
       const translatedError = DomainErrorTranslator.translate(response);
 
-    
       if (translatedError instanceof ClientError) {
         const newResponse = h.response({
           status: 'fail',
@@ -83,12 +83,10 @@ const createServer = async (container) => {
         return newResponse;
       }
 
-  
       if (!translatedError.isServer) {
         return h.continue;
       }
 
-    
       const newResponse = h.response({
         status: 'error',
         message: 'terjadi kegagalan pada server kami',
@@ -97,7 +95,6 @@ const createServer = async (container) => {
       return newResponse;
     }
 
-  
     return h.continue;
   });
 

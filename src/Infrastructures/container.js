@@ -1,14 +1,15 @@
 /* istanbul ignore file */
 
+// Import library untuk membuat kontainer
 const { createContainer } = require('instances-container');
 
-// external agency
+// Import library eksternal
 const { nanoid } = require('nanoid');
 const bcrypt = require('bcrypt');
 const Jwt = require('@hapi/jwt');
 const pool = require('./database/postgres/pool');
 
-// service (repository, helper, manager, etc)
+// Import service (repository, helper, manager, dll)
 const UserRepository = require('../Domains/users/UserRepository');
 const PasswordHash = require('../Applications/security/PasswordHash');
 const UserRepositoryPostgres = require('./repository/UserRepositoryPostgres');
@@ -20,7 +21,7 @@ const CommentRepositoryPostgres = require('./repository/CommentRepositoryPostgre
 const ReplyRepository = require('../Domains/replies/ReplyRepository');
 const ReplyRepositoryPostgres = require('./repository/ReplyRepositoryPostgres');
 
-// use case
+// Import use case
 const AddUserUseCase = require('../Applications/use_case/AddUserUseCase');
 const AuthenticationTokenManager = require('../Applications/security/AuthenticationTokenManager');
 const JwtTokenManager = require('./security/JwtTokenManager');
@@ -36,10 +37,10 @@ const DeleteCommentUseCase = require('../Applications/use_case/DeleteCommentUseC
 const AddReplyUseCase = require('../Applications/use_case/AddReplyUseCase');
 const DeleteReplyUseCase = require('../Applications/use_case/DeleteReplyUseCase');
 
-// creating container
+// Membuat kontainer IoC
 const container = createContainer();
 
-// registering services and repository
+// Mendaftarkan layanan (services) dan repositori ke dalam kontainer
 container.register([
   {
     key: UserRepository.name,
@@ -98,7 +99,7 @@ container.register([
         },
         {
           concrete: nanoid,
-        }
+        },
       ],
     },
   },
@@ -112,7 +113,7 @@ container.register([
         },
         {
           concrete: nanoid,
-        }
+        },
       ],
     },
   },
@@ -126,13 +127,13 @@ container.register([
         },
         {
           concrete: nanoid,
-        }
+        },
       ],
     },
   }
 ]);
 
-// registering use cases
+// Mendaftarkan use cases ke dalam kontainer
 container.register([
   {
     key: AddUserUseCase.name,
@@ -240,7 +241,6 @@ container.register([
         {
           name: 'replyRepository',
           internal: ReplyRepository.name,
-
         },
       ],
     },
@@ -258,7 +258,7 @@ container.register([
         {
           name: 'threadRepository',
           internal: ThreadRepository.name,
-        }
+        },
       ],
     },
   },
@@ -279,7 +279,7 @@ container.register([
         {
           name: 'threadRepository',
           internal: ThreadRepository.name,
-        }
+        },
       ],
     },
   },
@@ -300,7 +300,7 @@ container.register([
         {
           name: 'threadRepository',
           internal: ThreadRepository.name,
-        }
+        },
       ],
     },
   },
@@ -325,11 +325,10 @@ container.register([
         {
           name: 'threadRepository',
           internal: ThreadRepository.name,
-        }
+        },
       ],
     },
   },
-  
 ]);
 
 module.exports = container;

@@ -1,12 +1,11 @@
 const ThreadDetail = require('../ThreadDetail');
 
-describe('a ThreadDetail entities', () => {
-  it('should throw error when payload did not contain needed property', () => {
+describe('ThreadDetail Entity', () => {
+  it('should throw an error when payload does not contain needed properties', () => {
     // Arrange
     const payload = {
       title: 'title',
       body: 'body',
-      date: 'date',
       comments: [],
     };
 
@@ -14,7 +13,7 @@ describe('a ThreadDetail entities', () => {
     expect(() => new ThreadDetail(payload)).toThrowError('THREAD_DETAIL.NOT_CONTAIN_NEEDED_PROPERTY');
   });
 
-  it('should throw error when payload did not meet data type specification', () => {
+  it('should throw an error when payload does not meet data type specifications', () => {
     // Arrange
     const payload = {
       id: 123,
@@ -29,7 +28,7 @@ describe('a ThreadDetail entities', () => {
     expect(() => new ThreadDetail(payload)).toThrowError('THREAD_DETAIL.NOT_MEET_DATA_TYPE_SPECIFICATION');
   });
 
-  it('should create threadDetail object correctly', () => {
+  it('should create a ThreadDetail object with the correct properties', () => {
     // Arrange
     const payload = {
       id: 'thread-123',

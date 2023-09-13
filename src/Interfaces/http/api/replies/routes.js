@@ -4,7 +4,7 @@ const routes = (handler) => ([
     path: '/threads/{threadId}/comments/{commentId}/replies',
     handler: handler.postReplyHandler,
     options: {
-      auth: 'forum_api_jwt',
+      auth: 'forum_sub_v1',
       tags: ['api', 'replies'],
       description: 'Create a new reply',
     },
@@ -14,7 +14,7 @@ const routes = (handler) => ([
     path: '/threads/{threadId}/comments/{commentId}/replies/{replyId}',
     handler: handler.deleteReplyHandler,
     options: {
-      auth: 'forum_api_jwt',
+      auth: 'forum_sub_v1',
       tags: ['api', 'replies'],
       description: 'Delete a reply',
     },

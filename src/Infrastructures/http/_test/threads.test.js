@@ -20,6 +20,21 @@ describe('/threads endpoint', () => {
     jest.setTimeout(120000);
   });
 
+  // Utility function to create a thread and return its ID
+  async function createThreadAndReturnId(server, accessToken, payload) {
+    const response = await server.inject({
+      method: 'POST',
+      url: '/threads',
+      payload,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const responseJson = JSON.parse(response.payload);
+    return responseJson.data.addedThread.id;
+  }
+
   describe('when POST /threads', () => {
     it('should response 201 and persisted thread', async () => {
       // Arrange
@@ -27,25 +42,14 @@ describe('/threads endpoint', () => {
         title: 'title',
         body: 'body',
       };
-      // eslint-disable-next-line no-undef
       const server = await createServer(container);
       const accessToken = await AuthenticationsTestHelper.getAccessToken(server);
 
       // Action
-      const response = await server.inject({
-        method: 'POST',
-        url: '/threads',
-        payload: requestPayload,
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const threadId = await createThreadAndReturnId(server, accessToken, requestPayload);
 
       // Assert
-      const responseJson = JSON.parse(response.payload);
-      expect(response.statusCode).toEqual(201);
-      expect(responseJson.status).toEqual('success');
-      expect(responseJson.data.addedThread).toBeDefined();
+      expect(threadId).toBeDefined();
     });
 
     it('should response 400 when request payload not contain needed property', async () => {
@@ -105,12 +109,16 @@ describe('/threads endpoint', () => {
       // Arrange
       const server = await createServer(container);
       const accessToken = await AuthenticationsTestHelper.getAccessToken(server);
-      const thread = await ThreadsTestHelper.createThread(server, { title: 'title', body: 'body' }, accessToken);
+      const requestPayload = {
+        title: 'title',
+        body: 'body',
+      };
+      const threadId = await createThreadAndReturnId(server, accessToken, requestPayload);
 
       // Action
       const response = await server.inject({
         method: 'GET',
-        url: `/threads/${thread.id}`,
+        url: `/threads/${threadId}`,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

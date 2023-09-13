@@ -11,8 +11,24 @@ const container = require('../../container');
 const createServer = require('../createServer');
 
 describe('/replies endpoint', () => {
+  beforeAll(async () => {
+    jest.setTimeout(120000);
+  });
+
   afterAll(async () => {
     await pool.end();
+  });
+
+  let server;
+  let accessToken;
+  let threadId;
+  let commentId;
+
+  beforeEach(async () => {
+    server = await createServer(container);
+    accessToken = await AuthenticationsTestHelper.getAccessToken(server);
+    threadId = await ThreadsTestHelper.getThreadId(server, accessToken);
+    commentId = await CommentsTestHelper.getCommentId(server, accessToken, threadId);
   });
 
   afterEach(async () => {
@@ -22,21 +38,12 @@ describe('/replies endpoint', () => {
     await UsersTableTestHelper.cleanTable();
   });
 
-  beforeEach(async () => {
-    jest.setTimeout(120000);
-  });
-
   describe('when POST /replies', () => {
     it('should response 201 and persisted reply', async () => {
       // Arrange
       const requestPayload = {
         content: 'content',
       };
-      // eslint-disable-next-line no-undef
-      const server = await createServer(container);
-      const accessToken = await AuthenticationsTestHelper.getAccessToken(server);
-      const threadId = await ThreadsTestHelper.getThreadId(server, accessToken);
-      const commentId = await CommentsTestHelper.getCommentId(server, accessToken, threadId);
 
       // Action
       const response = await server.inject({
@@ -58,10 +65,6 @@ describe('/replies endpoint', () => {
     it('should response 400 when request payload not contain needed property', async () => {
       // Arrange
       const requestPayload = {};
-      const server = await createServer(container);
-      const accessToken = await AuthenticationsTestHelper.getAccessToken(server);
-      const threadId = await ThreadsTestHelper.getThreadId(server, accessToken);
-      const commentId = await CommentsTestHelper.getCommentId(server, accessToken, threadId);
 
       // Action
       const response = await server.inject({
@@ -85,10 +88,6 @@ describe('/replies endpoint', () => {
       const requestPayload = {
         content: ['content'],
       };
-      const server = await createServer(container);
-      const accessToken = await AuthenticationsTestHelper.getAccessToken(server);
-      const threadId = await ThreadsTestHelper.getThreadId(server, accessToken);
-      const commentId = await CommentsTestHelper.getCommentId(server, accessToken, threadId);
 
       // Action
       const response = await server.inject({
@@ -112,8 +111,6 @@ describe('/replies endpoint', () => {
       const requestPayload = {
         content: 'content',
       };
-      const server = await createServer(container);
-      const accessToken = await AuthenticationsTestHelper.getAccessToken(server);
 
       // Action
       const response = await server.inject({
@@ -136,10 +133,6 @@ describe('/replies endpoint', () => {
   describe('when DELETE /replies/:id', () => {
     it('should response 200 and deleted reply', async () => {
       // Arrange
-      const server = await createServer(container);
-      const accessToken = await AuthenticationsTestHelper.getAccessToken(server);
-      const threadId = await ThreadsTestHelper.getThreadId(server, accessToken);
-      const commentId = await CommentsTestHelper.getCommentId(server, accessToken, threadId);
       const replyId = await RepliesTestHelper.getReplyId(server, accessToken, threadId, commentId);
 
       // Action
@@ -158,12 +151,6 @@ describe('/replies endpoint', () => {
     });
 
     it('should response 404 when reply not found', async () => {
-      // Arrange
-      const server = await createServer(container);
-      const accessToken = await AuthenticationsTestHelper.getAccessToken(server);
-      const threadId = await ThreadsTestHelper.getThreadId(server, accessToken);
-      const commentId = await CommentsTestHelper.getCommentId(server, accessToken, threadId);
-
       // Action
       const response = await server.inject({
         method: 'DELETE',

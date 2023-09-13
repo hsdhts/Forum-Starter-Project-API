@@ -1,43 +1,45 @@
 const AddThread = require('../AddThread');
 
-describe('a AddThread entities', () => {
-  it('should throw error when payload did not contain needed property', () => {
-    // Arrange
-    const payload = {
-      title: 'title',
-      body: 'body',
-    };
+describe('AddThread Entity', () => {
+  describe('Constructor', () => {
+    it('should throw an error when payload does not contain needed properties', () => {
+      // Arrange
+      const payload = {
+        title: 'title',
+        body: 'body',
+      };
 
-    // Action and Assert
-    expect(() => new AddThread(payload)).toThrowError('ADD_THREAD.NOT_CONTAIN_NEEDED_PROPERTY');
-  });
+      // Action and Assert
+      expect(() => new AddThread(payload)).toThrowError('ADD_THREAD.NOT_CONTAIN_NEEDED_PROPERTY');
+    });
 
-  it('should throw error when payload did not meet data type specification', () => {
-    // Arrange
-    const payload = {
-      owner_id: 'user-123',
-      title: 1234,
-      body: 'body',
-    };
+    it('should throw an error when payload does not meet data type specifications', () => {
+      // Arrange
+      const payload = {
+        owner_id: 'husada-123',
+        title: 1234,
+        body: 'body',
+      };
 
-    // Action and Assert
-    expect(() => new AddThread(payload)).toThrowError('ADD_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
-  });
+      // Action and Assert
+      expect(() => new AddThread(payload)).toThrowError('ADD_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
+    });
 
-  it('should create AddThread object correctly', () => {
-    // Arrange
-    const payload = {
-      owner_id: 'user-123',
-      title: 'title',
-      body: 'body',
-    };
+    it('should create an AddThread object with the correct properties', () => {
+      // Arrange
+      const payload = {
+        owner_id: 'husada-123',
+        title: 'title',
+        body: 'body',
+      };
 
-    // Action
-    const { owner_id, title, body } = new AddThread(payload);
+      // Action
+      const thread = new AddThread(payload);
 
-    // Assert
-    expect(owner_id).toBe(payload.owner_id);
-    expect(title).toBe(payload.title);
-    expect(body).toBe(payload.body);
+      // Assert
+      expect(thread.owner_id).toBe(payload.owner_id);
+      expect(thread.title).toBe(payload.title);
+      expect(thread.body).toBe(payload.body);
+    });
   });
 });
