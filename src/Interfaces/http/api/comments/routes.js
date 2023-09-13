@@ -6,7 +6,7 @@ const routes = (handler) => ([
     options: {
       auth: 'forum_sub_v1',
       tags: ['api', 'comments'],
-      description: 'Buat komen baru',
+      description: 'create a new comment',
     },
   },
   {
@@ -16,7 +16,7 @@ const routes = (handler) => ([
     options: {
       auth: 'forum_sub_v1',
       tags: ['api', 'comments'],
-      description: 'Hapus komen ini',
+      description: 'delete comment',
     },
   }
 ]);

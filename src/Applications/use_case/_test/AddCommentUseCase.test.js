@@ -6,31 +6,31 @@ const AddedComment = require('../../../Domains/comments/entities/AddedComment');
 const AddedThread = require('../../../Domains/threads/entities/AddedThread');
 
 describe('AddCommentUseCase', () => {
-  /**
-   * Menguji apakah use case mampu mengoskestrasikan langkah demi langkah dengan benar.
-   */
-  it('should orchestrating the add comment action correctly', async () => {
+  it('should correctly orchestrate the add comment action', async () => {
     // Arrange
     const useCasePayload = {
       content: 'content',
       owner_id: 'user-123',
       thread_id: 'thread-123',
     };
-    const expectedAddedComment = new AddedComment({
+
+    const expectedAddedComment = {
       id: 'comment-123',
       content: useCasePayload.content,
       thread_id: useCasePayload.thread_id,
       owner_id: useCasePayload.owner_id,
       created_at: expect.any(String),
       deleted_at: null,
-    });
+    };
 
-    /** creating dependency of use case */
-    const mockCommentRepository = new CommentRepository();
+    // Create a mock function for masukkanComment
+    const mockCommentRepository = {
+      masukkanComment: jest.fn(async () => expectedAddedComment),
+    };
+
     const mockThreadRepository = new ThreadRepository();
 
-    /** mocking needed function */
-    mockThreadRepository.mendapatkanThreadBerdasarkanId = jest.fn(async () => {
+    mockThreadRepository.mendapatkanThreadBerdasarkanId = async () => {
       return new AddedThread({
         id: 'thread-123',
         title: 'title',
@@ -38,24 +38,20 @@ describe('AddCommentUseCase', () => {
         owner_id: 'user-123',
         created_at: expect.any(String),
       });
-    });
-    mockCommentRepository.masukkanComment = jest.fn(() => Promise.resolve(expectedAddedComment));
+    };
 
-    /** creating use case instance */
-    const getCommentUseCase = new AddCommentUseCase({
+    const addCommentUseCase = new AddCommentUseCase({
       commentRepository: mockCommentRepository,
       threadRepository: mockThreadRepository,
     });
 
-    // Action
-    const addedComment = await getCommentUseCase.execute(useCasePayload);
+    // Act
+    const addedComment = await addCommentUseCase.execute(useCasePayload);
 
     // Assert
     expect(addedComment).toStrictEqual(expectedAddedComment);
-    expect(mockCommentRepository.masukkanComment).toBeCalledWith(new AddComment({
-      content: useCasePayload.content,
-      owner_id: useCasePayload.owner_id,
-      thread_id: useCasePayload.thread_id,
-    }));
+    expect(mockCommentRepository.masukkanComment).toBeCalledWith(
+      new AddComment(useCasePayload)
+    );
   });
 });

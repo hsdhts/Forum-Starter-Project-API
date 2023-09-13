@@ -8,9 +8,6 @@ const CommentDetail = require('../../../Domains/comments/entities/CommentDetail'
 const ReplyDetail = require('../../../Domains/replies/entities/ReplyDetail');
 
 describe('GetThreadDetailUseCase', () => {
-  /**
-   * Menguji apakah use case mampu mengoskestrasikan langkah demi langkah dengan benar.
-   */
   it('should orchestrating the get thread detail action correctly', async () => {
     // Arrange
     const useCasePayload = {
@@ -39,13 +36,11 @@ describe('GetThreadDetailUseCase', () => {
         })],
     });
 
-    /** creating dependency of use case */
     const mockUserRepository = new UserRepository();
     const mockThreadRepository = new ThreadRepository();
     const mockCommentRepository = new CommentRepository();
     const mockReplyRepository = new ReplyRepository();
 
-    /** mocking needed function */
     mockThreadRepository.mendapatkanThreadBerdasarkanId = jest.fn(async () => {
       return new ThreadDetail({
         id: 'thread-123',
@@ -86,7 +81,6 @@ describe('GetThreadDetailUseCase', () => {
       return 'username';
     });
 
-    /** creating use case instance */
     const getThreadDetailUseCase = new GetThreadDetailUseCase({
       userRepository: mockUserRepository,
       threadRepository: mockThreadRepository,
@@ -117,7 +111,7 @@ describe('GetThreadDetailUseCase', () => {
         new CommentDetail({
           id: 'comment-123',
           content: 'content1',
-          created_at: new Date("2020-01-04T00:00:00.000Z"),
+          created_at: new Date("2023-01-04T00:00:00.000Z"),
           username: 'username1',
           like_count: 0,
           replies: [],
@@ -125,7 +119,7 @@ describe('GetThreadDetailUseCase', () => {
         new CommentDetail({
           id: 'comment-124',
           content: 'content2',
-          created_at: new Date("2020-01-10T00:00:00.000Z"),
+          created_at: new Date("2023-01-10T00:00:00.000Z"),
           username: 'username2',
           like_count: 0,
           replies: [],
@@ -133,13 +127,11 @@ describe('GetThreadDetailUseCase', () => {
       ],
     });
 
-    /** creating dependency of use case */
     const mockUserRepository = new UserRepository();
     const mockThreadRepository = new ThreadRepository();
     const mockCommentRepository = new CommentRepository();
     const mockReplyRepository = new ReplyRepository();
 
-    /** mocking needed function */
     mockThreadRepository.mendapatkanThreadBerdasarkanId = jest.fn(async () => {
       return new ThreadDetail({
         id: 'thread-123',
@@ -158,7 +150,7 @@ describe('GetThreadDetailUseCase', () => {
           username: 'username2',
           content: 'content2',
           thread_id: 'thread-123',
-          created_at: new Date("2020-01-10T00:00:00.000Z"),
+          created_at: new Date("2023-01-10T00:00:00.000Z"),
           deleted_at: null,
           like_count: 0,
           replies: [],
@@ -168,7 +160,7 @@ describe('GetThreadDetailUseCase', () => {
           username: 'username1',
           content: 'content1',
           thread_id: 'thread-123',
-          created_at: new Date("2020-01-04T00:00:00.000Z"),
+          created_at: new Date("2023-01-04T00:00:00.000Z"),
           deleted_at: null,
           like_count: 0,
           replies: [],
@@ -182,7 +174,6 @@ describe('GetThreadDetailUseCase', () => {
       return 'username';
     });
 
-    /** creating use case instance */
     const getThreadDetailUseCase = new GetThreadDetailUseCase({
       userRepository: mockUserRepository,
       threadRepository: mockThreadRepository,
@@ -213,7 +204,7 @@ describe('GetThreadDetailUseCase', () => {
         new CommentDetail({
           id: 'comment-123',
           content: 'content1',
-          created_at: new Date("2020-01-04T00:00:00.000Z"),
+          created_at: new Date("2023-01-04T00:00:00.000Z"),
           username: 'username1',
           like_count: 0,
           replies: [
@@ -234,13 +225,11 @@ describe('GetThreadDetailUseCase', () => {
       ],
     });
 
-    /** creating dependency of use case */
     const mockUserRepository = new UserRepository();
     const mockThreadRepository = new ThreadRepository();
     const mockCommentRepository = new CommentRepository();
     const mockReplyRepository = new ReplyRepository();
 
-    /** mocking needed function */
     mockThreadRepository.mendapatkanThreadBerdasarkanId = jest.fn(async () => {
       return new ThreadDetail({
         id: 'thread-123',
@@ -259,7 +248,7 @@ describe('GetThreadDetailUseCase', () => {
           username: 'username1',
           content: 'content1',
           thread_id: 'thread-123',
-          created_at: new Date("2020-01-04T00:00:00.000Z"),
+          created_at: new Date("2023-01-04T00:00:00.000Z"),
           deleted_at: null,
           like_count: 0,
           replies: []
@@ -286,7 +275,6 @@ describe('GetThreadDetailUseCase', () => {
       return 'username';
     });
 
-    /** creating use case instance */
     const getThreadDetailUseCase = new GetThreadDetailUseCase({
       userRepository: mockUserRepository,
       threadRepository: mockThreadRepository,

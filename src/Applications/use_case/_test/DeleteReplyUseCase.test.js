@@ -109,7 +109,7 @@ describe('DeleteReplyUseCase', () => {
         id: 'thread-123',
         title: 'thread-123',
         content: 'this is a thread',
-        created_at: '2020-01-01',
+        created_at: new Date(),
         username: 'username1',
       });
     const mockCommentRepository = new CommentRepository();
@@ -117,7 +117,7 @@ describe('DeleteReplyUseCase', () => {
       .mockResolvedValue({
         id: 'comment-123',
         content: 'this is a comment',
-        created_at: '2020-01-01',
+        created_at: new Date(),
         username: 'username2',
       });
     const mockReplyRepository = new ReplyRepository();
@@ -125,14 +125,14 @@ describe('DeleteReplyUseCase', () => {
       .mockResolvedValue({
         id: 'reply-123',
         content: 'this is reply',
-        created_at: '2020-01-01',
+        created_at: new Date(),
         username: 'username2',
       });
     mockReplyRepository.hapusReply = jest.fn()
       .mockResolvedValue({
         id: 'reply-123',
         content: 'this is a reply',
-        created_at: '2020-01-01',
+        created_at: new Date(),
         username: 'username2',
       });
     const mockUserRepository = new UserRepository();
@@ -201,7 +201,6 @@ describe('DeleteReplyUseCase', () => {
     await deleteReplyUseCase.execute(useCasePayload);
 
     // Assert
-    // mungkin harusnya tothrowerrorr
     expect(mockReplyRepository.hapusReply).toHaveBeenCalledWith(useCasePayload.reply_id);
   });
 });

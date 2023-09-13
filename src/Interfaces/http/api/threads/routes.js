@@ -6,7 +6,7 @@ const routes = (handler) => ([
     options: {
       auth: 'forum_sub_v1',
       tags: ['api', 'threads'],
-      description: 'Membuat thread baru',
+      description: 'Create a new thread',
     },
   },
   {
@@ -15,7 +15,7 @@ const routes = (handler) => ([
     handler: handler.getThreadDetailHandler,
     options: {
       tags: ['api', 'threads'],
-      description: 'Mendapatkan detail thread',
+      description: 'Get thread detail',
     }
   },
 ]);
