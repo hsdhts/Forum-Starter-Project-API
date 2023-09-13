@@ -8,12 +8,12 @@ exports.up = pgm => {
         notNull: true,
       },
       thread_id: {
-        type: 'VARCHAR(55)',
+        type: 'VARCHAR(5)',
         notNull: true,
   
       },
       owner_id: {
-        type: 'VARCHAR(55)',
+        type: 'VARCHAR(5)',
         notNull: true,
     
       },
