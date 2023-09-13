@@ -4,9 +4,9 @@ const InvariantError = require('../InvariantError');
 describe('DomainErrorTranslator', () => {
   it('should translate error correctly', () => {
     expect(DomainErrorTranslator.translate(new Error('REGISTER_USER.NOT_CONTAIN_NEEDED_PROPERTY')))
-      .toStrictEqual(new InvariantError('tidak dapat membuat user baru karena properti yang dibutuhkan tidak ada'));
+      .toStrictEqual(new InvariantError('tidak dapat membuat user baru karena properti tidak lengkap sesuai yang dibutuhkan'));
     expect(DomainErrorTranslator.translate(new Error('REGISTER_USER.NOT_MEET_DATA_TYPE_SPECIFICATION')))
-      .toStrictEqual(new InvariantError('tidak dapat membuat user baru karena tipe data tidak sesuai'));
+      .toStrictEqual(new InvariantError('tidak dapat membuat user baru karena tipe data salah'));
     expect(DomainErrorTranslator.translate(new Error('REGISTER_USER.USERNAME_LIMIT_CHAR')))
       .toStrictEqual(new InvariantError('tidak dapat membuat user baru karena karakter username melebihi batas limit'));
     expect(DomainErrorTranslator.translate(new Error('REGISTER_USER.USERNAME_CONTAIN_RESTRICTED_CHARACTER')))
