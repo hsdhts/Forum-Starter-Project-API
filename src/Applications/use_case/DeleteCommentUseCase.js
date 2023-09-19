@@ -18,11 +18,15 @@ class DeleteCommentUseCase {
       throw new NotFoundError('comment not found');
     }
 
-   
-    const comment = await this._commentRepository.mendapatkanCommentBerdasarkanId(useCasePayload.comment_id);
+    // Memeriksa apakah pengguna memiliki hak untuk menghapus komentar
+    const isAuthorized = await this._commentRepository.isCommentOwnedByUser(
+      useCasePayload.comment_id,
+      useCasePayload.owner_id
+    );
 
-    const username = await this._userRepository.verifyUsernameById(useCasePayload.owner_id);
-    if (comment.username !== username) throw new AuthorizationError('pengguna tidak dapat menghapus komen ini, karena komen bukan milik anda');
+    if (!isAuthorized) {
+      throw new AuthorizationError('pengguna tidak dapat menghapus komen ini, karena komen bukan milik anda');
+    }
 
     return await this._commentRepository.hapusComment(useCasePayload.comment_id);
   }

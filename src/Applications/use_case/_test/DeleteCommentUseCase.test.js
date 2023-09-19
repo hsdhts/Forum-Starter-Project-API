@@ -14,6 +14,7 @@ describe('DeleteCommentUseCase', () => {
     mockThreadRepository.mendapatkanThreadBerdasarkanId = jest.fn().mockResolvedValue(null);
     const mockCommentRepository = new CommentRepository();
     mockCommentRepository.hapusComment = jest.fn();
+    mockCommentRepository.isCommentOwnedByUser = jest.fn().mockResolvedValue(true); 
     const mockUserRepository = new UserRepository();
     mockUserRepository.getUsernameById = jest.fn().mockResolvedValue('username');
 
@@ -38,6 +39,7 @@ describe('DeleteCommentUseCase', () => {
     mockThreadRepository.mendapatkanThreadBerdasarkanId = jest.fn().mockResolvedValue({});
     const mockCommentRepository = new CommentRepository();
     mockCommentRepository.hapusComment = jest.fn();
+    mockCommentRepository.isCommentOwnedByUser = jest.fn().mockResolvedValue(true); 
     const mockUserRepository = new UserRepository();
     mockUserRepository.getUsernameById = jest.fn().mockResolvedValue('username');
 
@@ -75,6 +77,7 @@ describe('DeleteCommentUseCase', () => {
       username: 'username2',
     });
     mockCommentRepository.hapusComment = jest.fn();
+    mockCommentRepository.isCommentOwnedByUser = jest.fn().mockResolvedValue(false); // Tambahkan ini
     const mockUserRepository = new UserRepository();
     mockUserRepository.verifyUsernameById = jest.fn().mockResolvedValue('username1');
 
@@ -112,6 +115,7 @@ describe('DeleteCommentUseCase', () => {
       username: 'username',
     });
     mockCommentRepository.hapusComment = jest.fn();
+    mockCommentRepository.isCommentOwnedByUser = jest.fn().mockResolvedValue(true); 
     const mockUserRepository = new UserRepository();
     mockUserRepository.verifyUsernameById = jest.fn().mockResolvedValue('username');
 

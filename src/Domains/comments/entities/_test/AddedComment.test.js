@@ -49,5 +49,14 @@ describe('AddedComment entities', () => {
     expect(addedComment.owner_id).toEqual(payload.owner_id);
     expect(addedComment.content).toEqual(payload.content);
     expect(addedComment.created_at).toEqual(payload.created_at);
+
+    // Assert
+  expect(addedComment.id).toEqual(payload.id);
+  expect(addedComment.owner_id).toEqual(payload.owner_id);
+  expect(addedComment.content).toEqual(payload.content);
+  expect(addedComment.thread_id).toEqual(payload.thread_id); 
+  expect(addedComment.created_at).toEqual(payload.created_at);
+  expect(addedComment.deleted_at).toEqual(payload.deleted_at); 
+
   });
 });

@@ -211,13 +211,13 @@ describe('GetThreadDetailUseCase', () => {
             new ReplyDetail({
               id: 'reply-123',
               content: 'reply1',
-              created_at: new Date("2021-01-01T00:00:00.000Z"),
+              created_at: new Date("2024-01-01T00:00:00.000Z"),
               username: 'username2',
             }),
             new ReplyDetail({
               id: 'reply-124',
               content: 'reply2',
-              created_at: new Date("2021-01-02T00:00:00.000Z"),
+              created_at: new Date("2024-01-02T00:00:00.000Z"),
               username: 'username2',
             }),
           ],
@@ -260,13 +260,13 @@ describe('GetThreadDetailUseCase', () => {
         new ReplyDetail({
           id: 'reply-124',
           content: 'reply2',
-          created_at: new Date("2021-01-02T00:00:00.000Z"),
+          created_at: new Date("2024-01-02T00:00:00.000Z"),
           username: 'username2',
         }),
         new ReplyDetail({
           id: 'reply-123',
           content: 'reply1',
-          created_at: new Date("2021-01-01T00:00:00.000Z"),
+          created_at: new Date("2024-01-01T00:00:00.000Z"),
           username: 'username2',
         }),
       ];

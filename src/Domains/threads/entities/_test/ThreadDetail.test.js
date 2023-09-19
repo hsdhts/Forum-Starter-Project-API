@@ -36,7 +36,7 @@ describe('ThreadDetail Entity', () => {
       body: 'body',
       created_at: new Date('2020-01-01T00:00:00.000Z'),
       username: 'username',
-      comments: [],
+      comments: [], 
     };
 
     // Action
@@ -48,5 +48,6 @@ describe('ThreadDetail Entity', () => {
     expect(threadDetail.title).toEqual(payload.title);
     expect(threadDetail.body).toEqual(payload.body);
     expect(threadDetail.date).toEqual(payload.created_at);
+    expect(threadDetail.comments).toEqual(payload.comments); 
   });
 });

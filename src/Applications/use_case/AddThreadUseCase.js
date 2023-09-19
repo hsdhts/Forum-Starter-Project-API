@@ -7,7 +7,15 @@ class AddThreadUseCase {
 
   async execute(useCasePayload) {
     const addThread = new AddThread(useCasePayload);
-    return this._threadRepository.masukkanThread(addThread);
+    const addedThread = await this._threadRepository.masukkanThread(addThread);
+  
+    return {
+      id: addedThread.id,
+      owner_id: addedThread.owner_id, // Menggunakan properti "owner_id" sesuai dengan yang diterima
+      title: addedThread.title,
+      body: addedThread.body,
+      created_at: addedThread.created_at,
+    };
   }
 }
 

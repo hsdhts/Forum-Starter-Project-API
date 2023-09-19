@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-
 exports.up = pgm => {
     pgm.createTable('comments', {
       id: {
@@ -8,7 +7,7 @@ exports.up = pgm => {
         notNull: true,
       },
       thread_id: {
-        type: 'VARCHAR(5)',
+        type: 'VARCHAR(55)',
         notNull: true,
   
       },

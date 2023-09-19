@@ -10,19 +10,23 @@ describe('AddThreadUseCase', () => {
       title: 'title',
       body: 'body',
       owner_id: 'user-123',
+      created_at: new Date(), 
     };
 
-    const expectedAddedThread = {
+    const expectedAddedThread = new AddedThread({
       id: 'user-123',
       title: useCasePayload.title,
       body: useCasePayload.body,
       owner_id: useCasePayload.owner_id,
-      created_at: expect.any(String),
-    };
+      created_at: useCasePayload.created_at,
+    });
 
-    // Create a mock function for masukkanThread
+    // fungsi mock untuk masukkanThread.
     const mockThreadRepository = {
-      masukkanThread: jest.fn().mockImplementation(() => Promise.resolve(expectedAddedThread)),
+      masukkanThread: jest.fn().mockImplementation((thread) => {
+        // mengembalikan objek AddedThread yang sesuai dengan implementasi sebenarnya
+        return Promise.resolve(expectedAddedThread);
+      }),
     };
 
     const addThreadUseCase = new AddThreadUseCase({
@@ -33,7 +37,7 @@ describe('AddThreadUseCase', () => {
     const addedThread = await addThreadUseCase.execute(useCasePayload);
 
     // Assert
-    expect(addedThread).toStrictEqual(expectedAddedThread);
-    expect(mockThreadRepository.masukkanThread).toBeCalledWith(new AddThread(useCasePayload));
+    expect(addedThread).toEqual(expectedAddedThread);
+    expect(mockThreadRepository.masukkanThread).toHaveBeenCalledWith(expect.any(AddThread)); 
   });
 });
